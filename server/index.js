@@ -1,12 +1,19 @@
 const express = require("express");
-const connectDb = require("./db/conn");
+const connectdb = require("./db/conn");
+
 require("dotenv").config();
 const app = express();
-connectDb();
 
-app.get("/", (req, res) => {
-  res.send("hi");
-});
-const server = app.listen(process.env.PORT || 6003, () => {
-  console.log("conected....");
+connectdb();
+
+Contact.deleteMany({})
+  .then(() => {
+    console.log("all data deleted");
+  })
+  .catch((err) => {
+    console.log("gg error");
+  });
+app.use("/api/contacts", require("./router/contactRouter"));
+app.listen(process.env.PORT || 5000, (req, res) => {
+  console.log("connected.....");
 });

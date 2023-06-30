@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
-
-const connectDb = async () => {
+const connectdb = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://admin:admin@cluster0.n6zu8hn.mongodb.net/Contacts?retryWrites=true&w=majority"
+      "mongodb+srv://admin:admin@cluster0.n6zu8hn.mongodb.net/lmydb?retryWrites=true&w=majority"
     );
-    console.log("Db conected...");
+    console.log("db connected");
   } catch (err) {
-    console.log("Db not connected");
+    console.log("Not db conected");
   }
 };
 
-module.exports = connectDb;
+module.exports = connectdb;
