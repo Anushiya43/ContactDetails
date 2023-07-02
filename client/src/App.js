@@ -1,4 +1,3 @@
-import "./components/styles.css";
 import Header from "./components/Header";
 import AddContact from "./components/AddContact";
 import EditContact from "./components/EditContact";
