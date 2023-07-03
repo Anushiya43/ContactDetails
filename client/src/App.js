@@ -1,16 +1,17 @@
 import Header from "./components/Header";
 import AddContact from "./components/AddContact";
 import EditContact from "./components/EditContact";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactDetails from "./components/ContactDetails";
 import Contacts from "./components/Contacts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import api from "./api";
 
 export default function App(props) {
+  const [a, sa] = useState([]);
   const [contacts, updateContact] = useState([]);
   const [edit, updateEdit] = useState([]);
   const [personal, setpersonal] = useState();
-
   function addContact(NewContact) {
     console.log(NewContact);
     console.log(contacts);
@@ -21,6 +22,20 @@ export default function App(props) {
     ]);
     console.log(contacts);
   }
+  useEffect(() => {
+    async function fetchData() {
+      // You can await here
+      const response = await api.getContact();
+      if (!response) {
+        console.log("err");
+      } else {
+        sa(response);
+        console.log("find");
+        console.log(a);
+      }
+    }
+    fetchData();
+  }, []);
 
   function editContact(contact) {
     updateEdit(contact);

@@ -3,9 +3,8 @@ const Contact = require("../middleware/contactMiddleware");
 
 const createContact = async (req, res) => {
   const newContact = new Contact({
-    ContactId: 102,
     Name: "Veni",
-    Age: 24,
+    email: veni@gmail.com,
   });
   await newContact
     .save()
