@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 
 const ContactModel = new mongoose.Schema(
   {
-    ContactId: { type: Number, default: 1, required: true },
     name: { type: String, required: true },
     email: {
       type: String,
@@ -16,5 +15,5 @@ const ContactModel = new mongoose.Schema(
   }
 );
 
-const Contact = mongoose.model("contact", ContactModel);
+const Contact = mongoose.model("Contact", ContactModel);
 module.exports = Contact;

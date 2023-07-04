@@ -14,22 +14,18 @@ export default function App(props) {
   const addContact = async (NewContact) => {
     console.log(NewContact);
     const { name, email } = NewContact;
-    axios
-      .post("https://gcf5ck-5000.csb.app/api/add", {
-        contactId: 2,
+    try {
+      const response = await axios.post("https://gcf5ck-5000.csb.app/api/add", {
         name: name,
         email: email,
-      })
-      .then(() => {
-        console.log("success");
-        this.props.history.push("/");
-      })
-      .catch((err) => {
-        console.log("error");
       });
-    console.log("ok");
+      console.log(response);
+      console.log("fff");
+    } catch (err) {
+      console.log("error in insert");
+    }
   };
-
+  
   useEffect(() => {
     async function fetchData() {
       // You can await here
@@ -46,11 +42,20 @@ export default function App(props) {
     fetchData();
   }, []);
 
-  function editContact(contact, id) {
+  function editContact(contact) {
     updateEdit(contact);
-    console.log(id);
+    console.log(edit);
+  }
+
+  function editedContact(c) {
+    const id = c._id;
+    console.log("c", id);
+    const { name, email } = c;
     axios
-      .get("https://gcf5ck-5000.csb.app/api/getone/" + id)
+      .put("https://gcf5ck-5000.csb.app/api/edit/" + id, {
+        name,
+        email,
+      })
       .then((response) => {
         console.log("nnn");
         console.log(response);
@@ -58,14 +63,6 @@ export default function App(props) {
       .catch((err) => {
         console.log("error in get");
       });
-
-    console.log(edit);
-  }
-
-  function editedContact(c) {
-    updateContact(
-      contacts.map((contact) => (contact.id === c.id ? c : contact))
-    );
   }
   function deleteContact(id) {
     axios.delete("https://gcf5ck-5000.csb.app/api/delete/${id}");

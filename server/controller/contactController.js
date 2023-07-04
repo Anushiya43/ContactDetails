@@ -25,19 +25,15 @@ const getContactById = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
-  const oldContact = await Contact.findById({ contactId: req.param.id });
-  if (!oldContact) {
-    oldContact.contactId = req.body.contactId;
-    oldContact.name = req.body.name;
-    oldContact.email = req.body.email;
-    oldContact
-      .save()
-      .then(() => {
-        console.log("saved");
-      })
-      .catch((err) => {
-        console.log("not inserted");
-      });
+  console.log(req.params.id);
+  const { name, email } = req.body;
+  const oldContact = await Contact.findOneAndUpdate(
+    { _id: req.params.id },
+    { name, email },
+    { new: true }
+  );
+  if (oldContact) {
+    console.log("updated", oldContact);
   } else {
     console.log("gg error");
   }

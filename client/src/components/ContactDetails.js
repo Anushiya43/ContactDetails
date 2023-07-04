@@ -48,7 +48,7 @@ export default function ContactDetails(props) {
               <button onClick={() => props.deleteContact(contact._id)}>
                 Delete
               </button>
-              <button onClick={() => props.editContact(contact, contact._id)}>
+              <button onClick={() => props.editContact(contact)}>
                 <Link to="/edit" className="link">
                   Edit
                 </Link>

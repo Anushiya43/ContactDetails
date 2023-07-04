@@ -20,7 +20,7 @@ export default function EditContact(props) {
 
   function handleClick() {
     console.log("data", data);
-    props.editedContact({ id: props.contact.id, ...data });
+    props.editedContact({ _id: props.contact._id, ...data });
   }
   return (
     <div className="Contact_Form">
