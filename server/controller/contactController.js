@@ -2,25 +2,22 @@ const express = require("express");
 const Contact = require("../middleware/contactMiddleware");
 
 const createContact = async (req, res) => {
-  const newContact = new Contact({
-    Name: "Veni",
-    email: veni@gmail.com,
-  });
+  const newContact = new Contact(req.body);
   await newContact
     .save()
     .then((savedContact) => {
       console.log("User Saved", savedContact);
     })
     .catch((err) => {
-      console.log("error");
+      console.log("you must provide contact");
     });
 };
 
 const getContactById = async (req, res) => {
-  let id = req.param.id;
-  await Contact.findById({ contactId: id })
-    .then((contact) => {
-      res.send(contact);
+  console.log(req.param.id);
+  await Contact.findOne({ contactId: req.param.id })
+    .then((data) => {
+      console.log("nn", data);
     })
     .catch((err) => {
       console.log("error");
@@ -28,13 +25,22 @@ const getContactById = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
-  await Contact.findOne()
-    .then(() => {
-      console.log("all data deleted");
-    })
-    .catch((err) => {
-      console.log("gg error");
-    });
+  const oldContact = await Contact.findById({ contactId: req.param.id });
+  if (!oldContact) {
+    oldContact.contactId = req.body.contactId;
+    oldContact.name = req.body.name;
+    oldContact.email = req.body.email;
+    oldContact
+      .save()
+      .then(() => {
+        console.log("saved");
+      })
+      .catch((err) => {
+        console.log("not inserted");
+      });
+  } else {
+    console.log("gg error");
+  }
 };
 
 const deleteContact = async (req, res) => {

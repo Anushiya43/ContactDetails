@@ -11,11 +11,10 @@ const {
   deleteAllContact,
 } = require("../controller/contactController");
 
-router.route("/").get(getContact).post(createContact);
-router
-  .route("/:id")
-  .put(updateContact)
-  .delete(deleteContact)
-  .get(getContactById);
+router.route("/display").get(getContact);
+router.route("/add").post(createContact);
+router.route("/edit/:id").put(updateContact);
+router.route("/delete/:id").delete(deleteContact);
+router.route("/getone/:id").get(getContactById);
 
 module.exports = router;

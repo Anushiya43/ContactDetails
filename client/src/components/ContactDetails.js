@@ -1,11 +1,10 @@
-
 import man from "./pictures/man.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function ContactDetails(props) {
   let contacts = props.contacts;
-  const [flag, setflag] = useState(true);
+  const [flag, setflag] = useState(false);
   const [flagall, setflagall] = useState(false);
   function handleSelect() {
     setflag(!flag);
@@ -46,10 +45,10 @@ export default function ContactDetails(props) {
               </Link>
             </div>
             <div className="buttondisplay">
-              <button onClick={() => props.deleteContact(contact.id)}>
+              <button onClick={() => props.deleteContact(contact._id)}>
                 Delete
               </button>
-              <button onClick={() => props.editContact(contact)}>
+              <button onClick={() => props.editContact(contact, contact._id)}>
                 <Link to="/edit" className="link">
                   Edit
                 </Link>

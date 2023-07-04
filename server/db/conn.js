@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
 const connectdb = async () => {
   try {
     await mongoose.connect(

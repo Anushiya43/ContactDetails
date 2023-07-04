@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const ContactModel = new mongoose.Schema(
   {
     ContactId: { type: Number, default: 1, required: true },
-    Name: { type: String, required: true },
+    name: { type: String, required: true },
     email: {
       type: String,
       required: true,

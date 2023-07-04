@@ -5,51 +5,71 @@ import { useEffect, useState } from "react";
 import ContactDetails from "./components/ContactDetails";
 import Contacts from "./components/Contacts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import api from "./api";
+import axios from "axios";
 
 export default function App(props) {
-  const [a, sa] = useState([]);
   const [contacts, updateContact] = useState([]);
   const [edit, updateEdit] = useState([]);
   const [personal, setpersonal] = useState();
-  function addContact(NewContact) {
+  const addContact = async (NewContact) => {
     console.log(NewContact);
-    console.log(contacts);
+    const { name, email } = NewContact;
+    axios
+      .post("https://gcf5ck-5000.csb.app/api/add", {
+        contactId: 2,
+        name: name,
+        email: email,
+      })
+      .then(() => {
+        console.log("success");
+        this.props.history.push("/");
+      })
+      .catch((err) => {
+        console.log("error");
+      });
+    console.log("ok");
+  };
 
-    updateContact((prevContacts) => [
-      ...prevContacts,
-      { id: contacts.length + 1, ...NewContact },
-    ]);
-    console.log(contacts);
-  }
   useEffect(() => {
     async function fetchData() {
       // You can await here
-      const response = await api.getContact();
+      const response = await axios.get(
+        "https://gcf5ck-5000.csb.app/api/display"
+      );
       if (!response) {
         console.log("err");
       } else {
-        sa(response);
-        console.log("find");
-        console.log(a);
+        console.log(response);
+        updateContact(response.data);
       }
     }
     fetchData();
   }, []);
 
-  function editContact(contact) {
+  function editContact(contact, id) {
     updateEdit(contact);
+    console.log(id);
+    axios
+      .get("https://gcf5ck-5000.csb.app/api/getone/" + id)
+      .then((response) => {
+        console.log("nnn");
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log("error in get");
+      });
+
     console.log(edit);
   }
 
   function editedContact(c) {
-    console.log("c" + c.id);
     updateContact(
       contacts.map((contact) => (contact.id === c.id ? c : contact))
     );
   }
   function deleteContact(id) {
-    updateContact(contacts.filter((contact) => contact.id !== id));
+    axios.delete("https://gcf5ck-5000.csb.app/api/delete/${id}");
+    console.log("jjj");
   }
 
   function oneContact(c) {

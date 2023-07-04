@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 export default function EditContact(props) {
   const [data, updateData] = useState({
     name: "",
-    email: ""
+    email: "",
   });
   function handleChange(event) {
     const { name, value } = event.target;
     updateData(function (prev) {
       return {
         ...prev,
-        [name]: value
+        [name]: value,
       };
     });
   }
