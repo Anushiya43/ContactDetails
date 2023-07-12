@@ -2,11 +2,19 @@ const express = require("express");
 const Contact = require("../middleware/contactMiddleware");
 
 const createContact = async (req, res) => {
-  const newContact = new Contact(req.body);
+  let { name, email } = req.body;
+  let photo = req.file;
+  console.log(photo);
+  const newContact = new Contact({
+    photo: photo.filename,
+    name: req.body.name,
+    email: req.body.email,
+  });
+  console.log(newContact);
   await newContact
     .save()
     .then((savedContact) => {
-      console.log("User Saved", savedContact);
+      res.send(savedContact);
     })
     .catch((err) => {
       console.log("you must provide contact");
@@ -20,42 +28,44 @@ const getContactById = async (req, res) => {
       console.log("nn", data);
     })
     .catch((err) => {
-      console.log("error");
+      res.send("error");
     });
 };
 
 const updateContact = async (req, res) => {
   console.log(req.params.id);
   const { name, email } = req.body;
+  const photo = req.file;
+  console.log(photo);
   const oldContact = await Contact.findOneAndUpdate(
     { _id: req.params.id },
-    { name, email },
+    { photo: photo.filename, name, email },
     { new: true }
   );
   if (oldContact) {
-    console.log("updated", oldContact);
+    res.send(oldContact);
   } else {
-    console.log("gg error");
+    res.send("gg error");
   }
 };
 
 const deleteContact = async (req, res) => {
   await Contact.findOneAndDelete({ contactId: req.param.id })
     .then(() => {
-      console.log("all data deleted");
+      res.send("all data deleted");
     })
     .catch((err) => {
-      console.log("gg error");
+      res.send("gg error");
     });
 };
 
 const deleteAllContact = async (req, res) => {
   await Contact.deleteMany({})
     .then(() => {
-      console.log("all data deleted");
+      res.send("all data deleted");
     })
     .catch((err) => {
-      console.log("gg error");
+      res.send("gg error");
     });
 };
 

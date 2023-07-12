@@ -1,8 +1,8 @@
-const { timeStamp } = require("console");
 const mongoose = require("mongoose");
 
 const ContactModel = new mongoose.Schema(
   {
+    photo: { type: String, require: true },
     name: { type: String, required: true },
     email: {
       type: String,

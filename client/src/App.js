@@ -11,27 +11,11 @@ export default function App(props) {
   const [contacts, updateContact] = useState([]);
   const [edit, updateEdit] = useState([]);
   const [personal, setpersonal] = useState();
-  const addContact = async (NewContact) => {
-    console.log(NewContact);
-    const { name, email } = NewContact;
-    try {
-      const response = await axios.post("https://gcf5ck-5000.csb.app/api/add", {
-        name: name,
-        email: email,
-      });
-      console.log(response);
-      console.log("fff");
-    } catch (err) {
-      console.log("error in insert");
-    }
-  };
-  
+
   useEffect(() => {
     async function fetchData() {
       // You can await here
-      const response = await axios.get(
-        "https://gcf5ck-5000.csb.app/api/display"
-      );
+      const response = await axios.get("https://gcf5ck-5001.csb.app/api/");
       if (!response) {
         console.log("err");
       } else {
@@ -47,25 +31,8 @@ export default function App(props) {
     console.log(edit);
   }
 
-  function editedContact(c) {
-    const id = c._id;
-    console.log("c", id);
-    const { name, email } = c;
-    axios
-      .put("https://gcf5ck-5000.csb.app/api/edit/" + id, {
-        name,
-        email,
-      })
-      .then((response) => {
-        console.log("nnn");
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log("error in get");
-      });
-  }
   function deleteContact(id) {
-    axios.delete("https://gcf5ck-5000.csb.app/api/delete/${id}");
+    axios.delete("https://gcf5ck-5001.csb.app/api/" + id);
     console.log("jjj");
   }
 
@@ -90,13 +57,8 @@ export default function App(props) {
               />
             }
           />
-          <Route path="/add" element={<AddContact addContact={addContact} />} />
-          <Route
-            path="/edit"
-            element={
-              <EditContact editedContact={editedContact} contact={edit} />
-            }
-          />
+          <Route path="/add" element={<AddContact />} />
+          <Route path="/edit" element={<EditContact contact={edit} />} />
           <Route path="/display" element={<Contacts contact={personal} />} />
         </Routes>
       </BrowserRouter>
