@@ -10,6 +10,7 @@ export default function ContactDetails(props) {
   }
   function handleSelectAll() {
     setflagall(!flagall);
+    
   }
   return (
     <div className="ContactDetails">
