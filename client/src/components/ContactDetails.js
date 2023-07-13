@@ -1,11 +1,9 @@
-
-import man from "./pictures/man.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function ContactDetails(props) {
   let contacts = props.contacts;
-  const [flag, setflag] = useState(true);
+  const [flag, setflag] = useState(false);
   const [flagall, setflagall] = useState(false);
   function handleSelect() {
     setflag(!flag);
@@ -38,15 +36,21 @@ export default function ContactDetails(props) {
             ) : (
               ""
             )}{" "}
-            <img src={man} alt="pic" className="pic" />
             <div onClick={() => props.oneContact(contact)} className="detail">
               <Link to="/display" className="link1">
-                <h2>{contact.name}</h2>
-                <span>{contact.email}</span>
+                <img
+                  src={"https://gcf5ck-5001.csb.app/images/" + contact.photo}
+                  alt="pic"
+                  className="pic"
+                />
+                <div>
+                  <h2>{contact.name}</h2>
+                  <span>{contact.email}</span>
+                </div>
               </Link>
             </div>
             <div className="buttondisplay">
-              <button onClick={() => props.deleteContact(contact.id)}>
+              <button onClick={() => props.deleteContact(contact._id)}>
                 Delete
               </button>
               <button onClick={() => props.editContact(contact)}>

@@ -1,19 +1,17 @@
 const express = require("express");
 const connectdb = require("./db/conn");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 require("dotenv").config();
 const app = express();
-
+const port = process.env.PORT || 5001;
 connectdb();
-
-Contact.deleteMany({})
-  .then(() => {
-    console.log("all data deleted");
-  })
-  .catch((err) => {
-    console.log("gg error");
-  });
-app.use("/api/contacts", require("./router/contactRouter"));
-app.listen(process.env.PORT || 5000, (req, res) => {
-  console.log("connected.....");
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.static("public"));
+app.use(express.json());
+app.use("/api", require("./router/contactRouter"));
+app.listen(port, (req, res) => {
+  console.log("connected.....", port);
 });

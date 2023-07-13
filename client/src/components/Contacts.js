@@ -6,7 +6,10 @@ export default function contacts(props) {
   let contact = props.contact;
   return (
     <div className="Person">
-      <img src={man} alt="pic" />
+      <img
+        src={"https://gcf5ck-5001.csb.app/images/" + contact.photo}
+        alt="pic"
+      />
       <h2>{contact.name}</h2>
       <span>{contact.email}</span>
       <button>

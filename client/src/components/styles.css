@@ -20,13 +20,14 @@
   margin: 0;
   padding: 2% 10%;
 }
+
 .right {
   display: flex;
   width: 100%;
   column-gap: 5px;
   justify-content: flex-end;
 }
-.Contact_Form {
+form {
   height: max-content;
   padding: 2% 2%;
   display: grid;
@@ -71,19 +72,14 @@ button:hover {
   gap: 1%;
 }
 .Contact {
-  display: flex;
-  width: 100%;
+  display: grid;
+  justify-content: center;
   height: max-content;
   background-image: linear-gradient(to top right, white, yellow);
   margin: 0;
-  gap: 10px;
+  gap: 15px;
 }
-@media (max-width: 900px) {
-  .Contact {
-    display: grid;
-    justify-content: center;
-  }
-}
+
 .detail {
   display: flex;
   background-image: linear-gradient(to top right, white, yellow);
@@ -105,7 +101,6 @@ button:hover {
   color: #fff;
 }
 .Person {
-  margin: 10% 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,4 +109,12 @@ button:hover {
   width: max-content;
   height: max-content;
   padding: 10% 10%;
+  background-image: linear-gradient(to top right, white, yellow);
+  margin: 0% 0 0 30%;
+}
+
+@media (width<= 900px) {
+  .Person {
+    margin: 0 0 0 0%;
+  }
 }

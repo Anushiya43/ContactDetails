@@ -7,6 +7,11 @@
     "npm start": {
       "name": "npm start",
       "command": "npm start"
+    },
+    "cd server": {
+      "name": "cd server",
+      "command": "cd server",
+      "runAtStart": true
     }
   }
 }
