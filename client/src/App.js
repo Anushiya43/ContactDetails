@@ -33,7 +33,6 @@ export default function App(props) {
 
   function deleteContact(id) {
     axios.delete("https://gcf5ck-5001.csb.app/api/" + id);
-    console.log("jjj");
   }
 
   function oneContact(c) {
