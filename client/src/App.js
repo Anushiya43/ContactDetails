@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 export default function App(props) {
+  const url = "https://ml3klv-5001.csb.app/api/";
   const [contacts, updateContact] = useState([]);
   const [edit, updateEdit] = useState([]);
   const [personal, setpersonal] = useState();
@@ -15,11 +16,11 @@ export default function App(props) {
   useEffect(() => {
     async function fetchData() {
       // You can await here
-      const response = await axios.get("https://gcf5ck-5001.csb.app/api/");
+      const response = await axios.get(url);
       if (!response) {
         console.log("err");
       } else {
-        console.log(response);
+        console.log(contacts);
         updateContact(response.data);
       }
     }
@@ -32,7 +33,9 @@ export default function App(props) {
   }
 
   function deleteContact(id) {
-    axios.delete("https://gcf5ck-5001.csb.app/api/" + id);
+    console.log("id value  : " + id);
+
+    axios.delete(url + id);
   }
 
   function oneContact(c) {
@@ -56,8 +59,11 @@ export default function App(props) {
               />
             }
           />
-          <Route path="/add" element={<AddContact />} />
-          <Route path="/edit" element={<EditContact contact={edit} />} />
+          <Route path="/add" element={<AddContact url={url} />} />
+          <Route
+            path="/edit"
+            element={<EditContact url={url} contact={edit} />}
+          />
           <Route path="/display" element={<Contacts contact={personal} />} />
         </Routes>
       </BrowserRouter>

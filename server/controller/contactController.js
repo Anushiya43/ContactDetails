@@ -33,10 +33,17 @@ const getContactById = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
+  const oldphoto = 0;
   console.log(req.params.id);
   const { name, email } = req.body;
   const photo = req.file;
   console.log(photo);
+  const data = await Contact.findOne({ contactId: req.param.id });
+
+  console.log(data.photo);
+  if p)  {
+    photo  =  data.photo;
+  };
   const oldContact = await Contact.findOneAndUpdate(
     { _id: req.params.id },
     { photo: photo.filename, name, email },
@@ -50,9 +57,10 @@ const updateContact = async (req, res) => {
 };
 
 const deleteContact = async (req, res) => {
-  await Contact.findOneAndDelete({ contactId: req.param.id })
+  console.log(req.params.id);
+  await Contact.deleteOne({ _id: req.params.id })
     .then(() => {
-      res.send("all data deleted");
+      res.send("one data deleted");
     })
     .catch((err) => {
       res.send("gg error");

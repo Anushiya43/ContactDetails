@@ -39,11 +39,12 @@ export default function ContactDetails(props) {
             <div onClick={() => props.oneContact(contact)} className="detail">
               <Link to="/display" className="link1">
                 <img
-                  src={"https://gcf5ck-5001.csb.app/images/" + contact.photo}
+                  src={"https://ml3klv-5001.csb.app/images/" + contact.photo}
                   alt="pic"
                   className="pic"
                 />
                 <div>
+                  <h1>{contact._id}</h1>
                   <h2>{contact.name}</h2>
                   <span>{contact.email}</span>
                 </div>

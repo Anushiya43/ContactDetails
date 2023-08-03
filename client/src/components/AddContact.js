@@ -39,7 +39,7 @@ export default function AddContact(props) {
     }
     try {
       axios
-        .post("https://gcf5ck-5001.csb.app/api/", formDataToSend, {
+        .post(props.url, formDataToSend, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => console.log(response.data));
@@ -56,7 +56,7 @@ export default function AddContact(props) {
         {formData.photo ? (
           <img
             className="picture"
-            src={"https://gcf5ck-5001.csb.app/images/" + formData.photo}
+            src={"https://ml3klv-5001.csb.app/images/" + formData.photo}
             alt="Profile Picture"
           />
         ) : (

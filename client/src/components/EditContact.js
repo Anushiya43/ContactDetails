@@ -38,13 +38,9 @@ export default function EditContact(props) {
     }
     try {
       axios
-        .put(
-          "https://gcf5ck-5001.csb.app/api/" + props.contact._id,
-          formDataToSend,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        )
+        .put(props.url + props.contact._id, formDataToSend, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((response) => {});
       setFormData({
         name: "",
@@ -61,7 +57,7 @@ export default function EditContact(props) {
     <div>
       <form onSubmit={handleSubmit} action="post">
         <img
-          src={"https://gcf5ck-5001.csb.app/images/" + formData.photo}
+          src={"https://ml3klv-5001.csb.app/images/" + formData.photo}
           alt="pic"
         />
         <input
