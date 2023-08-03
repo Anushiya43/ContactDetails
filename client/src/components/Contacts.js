@@ -7,7 +7,7 @@ export default function contacts(props) {
   return (
     <div className="Person">
       <img
-        src={"https://gcf5ck-5001.csb.app/images/" + contact.photo}
+        src={"https://ml3klv-5001.csb.app/images/" + contact.photo}
         alt="pic"
       />
       <h2>{contact.name}</h2>
