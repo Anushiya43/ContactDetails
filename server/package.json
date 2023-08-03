@@ -4,6 +4,7 @@
   "description": "Manage Contact Details",
   "main": "index.js",
   "scripts": {
+    "script": "node index.js",
     "dev": "nodemon index.js"
   },
   "repository": {
